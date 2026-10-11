@@ -1,4 +1,5 @@
-import { Analytics } from "@vercel/analytics/next";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react"
 import WhatsAppButton from "./components/WhatsappButton";
 import Hero from "./components/Hero";
 import Header from "./components/Header";
@@ -25,6 +26,7 @@ function App() {
       <FAQ />
       <Footer />
       <Analytics />
+      <SpeedInsights />
     </>
   )
 }
