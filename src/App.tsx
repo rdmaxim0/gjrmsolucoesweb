@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import WhatsAppButton from "./components/WhatsappButton";
 import Hero from "./components/Hero";
 import Header from "./components/Header";
@@ -14,6 +15,7 @@ function App() {
 
   return (
     <>
+      <Analytics />
       <WhatsAppButton />
       <Header />
       <Hero />
