@@ -15,7 +15,6 @@ function App() {
 
   return (
     <>
-      <Analytics />
       <WhatsAppButton />
       <Header />
       <Hero />
@@ -25,6 +24,7 @@ function App() {
       <Pricing />
       <FAQ />
       <Footer />
+      <Analytics />
     </>
   )
 }
