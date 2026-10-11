@@ -1,0 +1,60 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.whatsapp-floating-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    background-color: $color-primary; // Azul claro da paleta
+    color: $bg-main; // Ícone escuro para máximo contraste
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba($color-primary, 0.4);
+    z-index: 9999;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: pulse-blue 2s infinite;
+
+    @include respond-to('medium') {
+        bottom: 32px;
+        right: 32px;
+        width: 64px;
+        height: 64px;
+    }
+
+    &:hover {
+        transform: translateY(-5px) scale(1.05);
+        background-color: $text-primary; // Acende para branco ao passar o rato
+        color: $color-primary; // Ícone fica azul
+        box-shadow: 0 10px 25px rgba($color-primary, 0.6);
+        animation: none; // Pára a pulsação para o utilizador focar no clique
+    }
+
+    // Aumenta ligeiramente o ícone dentro do botão no desktop
+    svg {
+        width: 28px;
+        height: 28px;
+        
+        @include respond-to('medium') {
+            width: 32px;
+            height: 32px;
+        }
+    }
+}
+
+// Animação de ondas (Ripple Effect)
+@keyframes pulse-blue {
+    0% {
+        box-shadow: 0 0 0 0 rgba($color-primary, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba($color-primary, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba($color-primary, 0);
+    }
+}

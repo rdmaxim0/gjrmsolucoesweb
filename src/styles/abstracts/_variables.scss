@@ -1,0 +1,48 @@
+// ==========================================
+// 🎨 CORES BASE DA MARCA (GJRM)
+// ==========================================
+$brand-blue: #002868; // Azul marinho extraído da logo
+$brand-black: #000000; 
+$brand-white: #ffffff; 
+
+// ==========================================
+// 🌑 BACKGROUNDS & SURFACES (DARK MODE AZULADO)
+// ==========================================
+// Fundos escuros, mas levemente puxados para o azul da sua marca
+$bg-main: #060b14;          // Fundo principal da página (mais elegante que o preto puro)
+$bg-surface: #0d182e;       // Fundo para o card do formulário
+$bg-surface-hover: #152748; // Efeito hover em elementos interativos
+$border-color: #1a2c54;     // Bordas sutis
+
+// ==========================================
+// 💥 AÇÃO E CONVERSÃO (O que faz o usuário clicar)
+// ==========================================
+$color-primary: #60a5fa;    // Um azul mais claro e vibrante para ícones e destaques com boa leitura
+$color-accent: #f59e0b;     // Laranja Âmbar para os Botões de CTA (alto contraste com o fundo azul escuro)
+
+// ==========================================
+// ✍️ TIPOGRAFIA E TEXTOS
+// ==========================================
+$text-primary: #f8fafc;     // Títulos principais (Branco gelo)
+$text-secondary: #94a3b8;   // Subtítulos e labels do formulário
+$text-muted: #64748b;       // Textos de apoio menores (ex: "Não enviamos spam")
+
+// ==========================================
+// 🚦 FEEDBACKS (Validação do Formulário)
+// ==========================================
+$color-success: #10b981;    // Verde para sucesso
+$color-error: #ef4444;      // Vermelho para erro (ex: e-mail inválido)
+
+// ==========================================
+// 📐 ESPAÇAMENTOS E BORDAS
+// ==========================================
+$radius-sm: 4px;
+$radius-md: 8px;
+$radius-lg: 12px; // Arredondamento dos cards para visual moderno
+$radius-xlg: 25px;
+
+$spacing-xs: 8px;
+$spacing-sm: 16px;
+$spacing-md: 24px;
+$spacing-lg: 32px;
+$spacing-xl: 64px;

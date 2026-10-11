@@ -1,0 +1,199 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.hero-section {
+    background: linear-gradient(to left, $border-color 0%, $bg-main 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: $spacing-xl $spacing-sm;
+    overflow: hidden;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xl;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    // No desktop, joga o texto para a esquerda e imagens para a direita
+    @include respond-to('large') {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.hero-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    z-index: 10;
+    align-items: center; // Centraliza no mobile
+
+    @include respond-to('large') {
+        align-items: flex-start; // No desktop volta a alinhar à esquerda
+    }
+
+    h1 {
+        color: $text-primary;
+        font-size: clamp(2.5rem, 5vw, 3.8rem);
+        font-weight: 800;
+        line-height: 1.15;
+        text-align: center;
+        margin-top: 50px;
+        
+
+        @include respond-to('large') {
+            text-align: left;
+            margin-top: 0px;
+        }
+
+        span {
+            color: $color-primary;
+        }
+    }
+
+    p {
+        color: $text-secondary;
+        text-align: center;
+
+        @include respond-to('large') {
+            text-align: left;
+        }
+    }
+
+    a {
+        text-decoration: none;
+        margin-top: $spacing-sm;
+        width: 100%;
+
+        @include respond-to('medium') {
+            width: max-content;
+        }
+
+        button {
+            background-color: $border-color;
+            border: none;
+            color: $text-primary;
+            font-size: 1rem;
+            font-weight: 700;
+            width: 100%;
+            padding: $spacing-sm $spacing-xl;
+            border-radius: $radius-xlg; 
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(1, 16, 48, 0.404);
+
+            &:hover {
+                transform: translateY(-3px);
+                filter: brightness(1.1);
+                color: $text-muted;
+                background-color: $bg-main;
+                box-shadow: 0 6px 20px rgba(17, 55, 126, 0.5);
+            }
+        }
+    }
+}
+
+.hero-right {
+    flex: 1.1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: $spacing-lg;
+    position: relative;
+    z-index: 1;
+
+    @include respond-to('large') {
+        justify-content: flex-end;
+        padding-top: 0;
+    }
+
+    img {
+        width: 100px;
+        height: auto;
+        position: relative;
+        filter: drop-shadow(-8px 10px 15px rgba(0, 0, 0, 0.6));
+
+        // 1. ORDEM FIXA: Define o index de cada foto na pilha natural (da esquerda para a direita)
+        &:nth-child(1) { z-index: 10; }
+        &:nth-child(2) { z-index: 20; }
+        &:nth-child(3) { z-index: 30; }
+        &:nth-child(4) { z-index: 40; }
+        &:nth-child(5) { z-index: 50; }
+
+        // 2. TRANSIÇÃO DE SAÍDA (Quando a imagem desce)
+        // Atrasamos a devolução do z-index em 0.5s para ela não passar por trás enquanto desce
+        transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                    filter 0.5s ease, 
+                    z-index 0s 0.5s; 
+
+        // Mobile First: Escondidos no mobile por padrão (Celulares 3 e 4)
+        &:nth-child(5) {
+            display: none;
+            
+            @include respond-to('small') {
+                display: block; 
+            }
+        }
+
+        &:not(:first-child) {
+            margin-left: -55px; 
+        }
+
+        @include respond-to('large') {
+            width: 160px; 
+            
+            &:not(:first-child) {
+                margin-left: -90px; 
+            }
+        }
+
+        // Primeiro celular destacado
+        &:first-child {
+            width: 125px;
+            
+            @include respond-to('large') {
+                width: 200px;
+                margin-bottom: 25px; 
+            }
+        }
+
+        // Último celular
+        &:last-child {
+            width: 110px; 
+            
+            @include respond-to('large') {
+                width: 140px; 
+            }
+        }
+
+        // ==========================================
+        // ESTADO ATIVO E HOVER (Quando a imagem sobe)
+        // ==========================================
+        &.active {
+            transform: translateY(-20px) scale(1.05);
+            z-index: 1000 !important; 
+            filter: drop-shadow(0px 15px 25px rgba(0, 0, 0, 0.8));
+    
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+            filter 0.5s ease, 
+            z-index 0s 0s;
+        }
+
+        @include respond-to('large') {
+            &:hover {
+                transform: translateY(-20px) scale(1.05);
+                z-index: 1000 !important; 
+                filter: drop-shadow(0px 15px 25px rgba(0, 0, 0, 0.8));
+                transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                filter 0.5s ease, 
+                z-index 0s 0s;
+            }
+        }
+    }
+}

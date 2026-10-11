@@ -1,0 +1,165 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.projects-section {
+    background-color: $bg-main; // Mantém o fundo escuro da secção
+    padding: 100px 16px;
+}
+
+.projects-header {
+    text-align: center;
+    margin-bottom: 64px;
+
+    h2 {
+        color: $text-primary;
+        font-size: clamp(2rem, 4vw, 2.5rem);
+        font-weight: 800;
+        margin-bottom: 16px;
+
+        span {
+            color: $color-primary; // Azul claro para destaque
+        }
+    }
+
+    p {
+        color: $text-secondary;
+        font-size: 1.125rem;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+}
+
+// Grelha 2x2 para os 4 projetos
+.projects-grid {
+    display: grid;
+    grid-template-columns: 1fr; // 1 coluna em telemóveis
+    gap: 48px 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    @include respond-to('medium') {
+        grid-template-columns: repeat(2, 1fr); // 2 colunas a partir de tablets/desktop
+    }
+}
+
+// ... (mantenha a parte de cima do _projects.scss intacta até .projects-grid)
+
+.project-item {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; // Gap um pouco menor no mobile
+    cursor: pointer;
+    text-decoration: none; // Remove o sublinhado do link <a> nativo
+    
+    // Efeito de Hover que afeta apenas Desktop
+    @include respond-to('medium') {
+        &:hover {
+            .project-image-wrapper img {
+                transform: scale(1.05); 
+            }
+
+            .project-overlay {
+                background-color: rgba(#060b14, 0.4); // Escurece no hover
+            }
+
+            .view-btn {
+                .btn-text {
+                    max-width: 150px; // Anima a expansão do texto "Ver Projeto"
+                    opacity: 1;
+                    padding-left: 16px;
+                }
+            }
+
+            .project-info h3 {
+                color: $color-primary; 
+            }
+        }
+    }
+}
+
+.project-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10; 
+    border-radius: $radius-lg;
+    overflow: hidden; 
+    background-color: $bg-surface; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+}
+
+// Overlay inteligente (Transparente no mobile, reage no desktop)
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent; 
+    transition: background-color 0.4s ease;
+    padding: 16px;
+    
+    // Botão moderno flutuante no canto inferior direito
+    .view-btn {
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+        display: flex;
+        align-items: center;
+        background-color: rgba(47, 116, 201, 0.15); // Fundo translúcido
+        backdrop-filter: blur(12px); // Desfoque do fundo (a mágica do vidro)
+        -webkit-backdrop-filter: blur(12px); // Suporte obrigatório para Safari e iOS
+        border: 1px solid rgba(255, 255, 255, 0.25); // Borda sutil de reflexo da luz
+        color: #000;
+        border-radius: 40px; // Pill shape
+        padding: 4px; // Espaço interno apertado para criar o botão cápsula
+        transition: all 0.4s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+        .icon-circle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background-color: transparent;
+            border-radius: 50%;
+        }
+
+        .btn-text {
+            // No mobile o texto é escondido para deixar apenas o botão redondo
+            max-width: 0; 
+            opacity: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    }
+}
+
+.project-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    h3 {
+        color: $text-primary;
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin: 0;
+        transition: color 0.3s ease;
+    }
+
+    span {
+        color: $text-secondary;
+        font-size: 0.9rem;
+    }
+}

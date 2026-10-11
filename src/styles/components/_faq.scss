@@ -1,0 +1,140 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.faq-section {
+    background-color: $bg-main; // Continua no fundo escuro elegante
+    padding: 80px 16px;
+
+    @include respond-to('medium') {
+        padding: 100px 16px;
+    }
+}
+
+.faq-header {
+    text-align: center;
+    margin-bottom: 48px;
+
+    h2 {
+        color: $text-primary;
+        font-size: clamp(2rem, 4vw, 2.5rem);
+        font-weight: 800;
+        margin-bottom: 16px;
+
+        span {
+            color: $color-primary;
+        }
+    }
+
+    p {
+        color: $text-secondary;
+        font-size: 1rem;
+        max-width: 600px;
+        margin: 0 auto;
+
+        @include respond-to('medium') {
+            font-size: 1.125rem;
+        }
+    }
+}
+
+.faq-list {
+    max-width: 800px; // Ligeiramente mais largo que o card de preço para equilibrar a tela
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.faq-item {
+    background-color: $bg-surface;
+    border: 1px solid rgba($border-color, 0.5);
+    border-radius: $radius-lg;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    // Hover apenas no Desktop
+    @include respond-to('large') {
+        &:hover {
+            border-color: rgba($color-primary, 0.5);
+            background-color: $bg-surface-hover;
+        }
+    }
+
+    &.active {
+        border-color: $color-primary; // Borda acende quando aberto
+        background-color: rgba($bg-surface-hover, 0.8);
+
+        .faq-question .icon-wrapper {
+            transform: rotate(180deg); // Anima a seta virando para cima
+            color: $color-primary;
+            background-color: rgba($color-primary, 0.1);
+        }
+
+        .faq-answer-wrapper {
+            grid-template-rows: 1fr; // Abre a altura magicamente
+        }
+        
+        .faq-answer {
+            padding: 0 24px 24px 24px; 
+            opacity: 1;
+        }
+    }
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    gap: 16px;
+
+    h3 {
+        color: $text-primary;
+        font-size: 1rem;
+        font-weight: 600;
+        margin: 0;
+        line-height: 1.4;
+
+        @include respond-to('medium') {
+            font-size: 1.15rem;
+        }
+    }
+
+    .icon-wrapper {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        color: $text-secondary;
+        transition: all 0.3s ease;
+    }
+}
+
+// O truque da animação de abrir e fechar com Grid
+.faq-answer-wrapper {
+    display: grid;
+    grid-template-rows: 0fr; // Começa fechado
+    transition: grid-template-rows 0.3s ease-out;
+}
+
+.faq-answer {
+    overflow: hidden; // Garante que o texto suma quando a altura for 0
+    padding: 0 24px 0 24px; 
+    opacity: 0;
+    transition: opacity 0.3s ease, padding 0.3s ease;
+
+    p {
+        color: $text-muted;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin: 0;
+
+        @include respond-to('medium') {
+            font-size: 1rem;
+        }
+    }
+}

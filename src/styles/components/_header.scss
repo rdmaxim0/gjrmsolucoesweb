@@ -1,0 +1,55 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+
+header {
+    z-index: 1000;
+    position: fixed;
+    width: 100%;
+    background-color: $bg-main;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    line-height: 22px;
+    padding: 15px 0;
+
+    img {
+        width: 60px;   
+    }
+
+    
+}
+
+
+.separator {
+    display: flex;
+    width: 1px;
+    height: 50px;
+    background-color: $border-color;
+    border-radius: 2px;
+    background-color: $brand-white;
+
+}
+
+
+ .header-left {
+
+    p:first-child {
+        color: $text-primary;
+        font-size: 24px;
+
+    }
+
+    p:last-child {
+        color: $text-muted;
+        font-size: 19px;
+
+    }   
+
+
+
+       
+    
+}
+   

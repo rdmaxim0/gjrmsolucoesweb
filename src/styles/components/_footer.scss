@@ -1,0 +1,180 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.footer-section {
+    background-color: $bg-surface; // Um tom escuro ligeiramente diferente do bg-main para marcar o fim da página
+    padding: 64px 16px 24px; // Menos padding em baixo
+    border-top: 1px solid rgba($border-color, 0.4); // Linha divisória subtil
+    position: relative;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+
+    @include respond-to('medium') {
+        grid-template-columns: 2fr 1fr 1.5fr; // A primeira coluna (marca) ocupa mais espaço
+        gap: 64px;
+    }
+}
+
+// Coluna 1: Marca
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .logo {
+        h2 {
+            color: $text-primary;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 0;
+
+            span {
+                color: $color-primary;
+                font-weight: 400; // Contraste de peso
+            }
+        }
+    }
+
+    p {
+        color: $text-muted;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        max-width: 350px;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 16px;
+        margin-top: 8px;
+
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background-color: rgba($color-primary, 0.05);
+            color: $color-primary;
+            border-radius: $radius-md;
+            border: 1px solid rgba($color-primary, 0.1);
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: $color-primary;
+                color: $bg-main;
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba($color-primary, 0.3);
+            }
+        }
+    }
+}
+
+// Coluna 2: Links
+.footer-links {
+    h3 {
+        color: $text-primary;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 24px;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        li a {
+            color: $text-secondary;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+
+            &:hover {
+                color: $color-primary;
+            }
+        }
+    }
+}
+
+// Coluna 3: Contacto
+.footer-contact {
+    h3 {
+        color: $text-primary;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 16px;
+    }
+
+    p {
+        color: $text-muted;
+        font-size: 0.95rem;
+        margin-bottom: 24px;
+    }
+
+    .btn-footer-cta {
+        display: inline-block;
+        background-color: transparent;
+        color: $color-primary;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.95rem;
+        padding: 12px 24px;
+        border: 2px solid $color-primary;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background-color: $color-primary;
+            color: $bg-main;
+        }
+    }
+}
+
+// Base do Rodapé (Copyright e Scroll Top)
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba($border-color, 0.3);
+
+    @include respond-to('medium') {
+        flex-direction: row;
+    }
+
+    p {
+        color: $text-muted;
+        font-size: 0.85rem;
+        margin: 0;
+        text-align: center;
+    }
+
+    .btn-scroll-top {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: rgba($color-primary, 0.1);
+        color: $color-primary;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background-color: $color-primary;
+            color: $bg-main;
+            transform: translateY(-3px);
+        }
+    }
+}

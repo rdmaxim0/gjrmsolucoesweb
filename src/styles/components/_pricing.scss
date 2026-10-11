@@ -1,0 +1,244 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.pricing-section {
+    background-color: $bg-main;
+    padding: 80px 16px; // Padding reduzido no mobile
+    position: relative;
+    overflow: hidden;
+
+    @include respond-to('medium') {
+        padding: 100px 16px;
+    }
+}
+
+.pricing-header {
+    text-align: center;
+    margin-bottom: 48px;
+
+    h2 {
+        color: $text-primary;
+        font-size: clamp(2rem, 4vw, 2.5rem);
+        font-weight: 800;
+        margin-bottom: 16px;
+
+        span {
+            color: $color-primary; 
+        }
+    }
+
+    p {
+        color: $text-secondary;
+        font-size: 1rem;
+        
+        @include respond-to('medium') {
+            font-size: 1.125rem;
+        }
+    }
+}
+
+.pricing-wrapper {
+    position: relative;
+    max-width: 500px; 
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 8px; // Garante que o card não encosta nas bordas da tela
+}
+
+.glow-effect {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba($color-primary, 0.15) 0%, rgba(0,0,0,0) 70%);
+    filter: blur(40px);
+    z-index: 0;
+    transform: scale(1.2);
+}
+
+.pricing-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    background: linear-gradient(145deg, rgba(13, 24, 46, 0.9) 0%, rgba(6, 11, 20, 0.95) 100%); 
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: $radius-lg; 
+    border: 1px solid rgba($color-primary, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    
+    // Ajustes Mobile First: Menos padding e gap para o conteúdo respirar
+    padding: 32px 24px;
+    gap: 32px;
+    
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+
+    // Volta aos tamanhos generosos no Desktop
+    @include respond-to('medium') {
+        padding: 48px 40px;
+        border-radius: $radius-xlg;
+        gap: 40px;
+    }
+
+    // Efeito Hover isolado APENAS para Desktop (Evita o bug no toque do mobile)
+    @include respond-to('large') {
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba($color-primary, 0.4); 
+        }
+    }
+}
+
+.card-top {
+    text-align: center;
+
+    .badge {
+        display: inline-block;
+        background-color: rgba($color-primary, 0.1);
+        color: $color-primary;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 0.75rem; // Menor no mobile
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        border: 1px solid rgba($color-primary, 0.2);
+
+        @include respond-to('medium') {
+            font-size: 0.85rem;
+        }
+    }
+
+    h3 {
+        color: $text-primary;
+        font-size: 1.25rem; // Título menor no mobile
+        font-weight: 600;
+
+        @include respond-to('medium') {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.pricing-value {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .de-price {
+        color: $text-muted;
+        font-size: 1rem;
+        text-decoration: line-through;
+        margin-bottom: -5px;
+    }
+
+    .por-price {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        color: $text-primary;
+
+        .currency {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-top: 10px;
+            margin-right: 4px;
+            color: $color-primary; 
+        }
+
+        .amount {
+            font-size: 3.5rem; // Reduzido drasticamente para mobile
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -2px;
+            background: linear-gradient(to bottom, #ffffff 0%, #a0aec0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            @include respond-to('medium') {
+                font-size: 5rem; // Volta a ser gigante no desktop
+            }
+        }
+    }
+
+    .condicao {
+        color: $text-muted;
+        font-size: 0.8rem;
+        margin-top: 8px;
+    }
+}
+
+.benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; // Gap menor no mobile
+    padding: 0;
+
+    .benefit-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .icon-blue {
+            color: $color-primary;
+            flex-shrink: 0;
+            width: 20px; // Ícone ligeiramente menor no mobile
+            height: 20px;
+
+            @include respond-to('medium') {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        span {
+            color: $text-secondary;
+            font-size: 0.9rem; // Fonte reduzida para evitar quebra de linha ("Landing Page Responsiva")
+            font-weight: 500;
+            line-height: 1.3;
+
+            @include respond-to('medium') {
+                font-size: 1.05rem;
+            }
+        }
+    }
+}
+
+.btn-garantir {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: $color-primary;
+    color: $brand-blue; 
+    border: none;
+    padding: 16px; // Botão mais contido no mobile
+    border-radius: $radius-md;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+
+    @include respond-to('medium') {
+        padding: 20px;
+        font-size: 1.1rem;
+        border-radius: $radius-lg;
+    }
+
+    // Hover do botão também isolado para Desktop
+    @include respond-to('large') {
+        &:hover {
+            background-color: #ffffff; 
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba($color-primary, 0.4);
+        }
+    }
+}
